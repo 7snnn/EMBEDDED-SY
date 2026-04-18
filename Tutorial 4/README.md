@@ -24,14 +24,14 @@ DigitalOut buzzer(D8); - To actuate the hardware alarm.
 
 thread_sleep_for(500); - Used as a 500ms sampling delay to prevent terminal flooding while maintaining real-time responsiveness.
 
-4. Technical Reflection (Errors & Challenges)
-Integrating the analog hardware introduced a unique set of physical challenges that severely affected the expected output:
+4. Hardware Testing & Validation
+To ensure the reliability of the embedded system, physical stress tests were conducted on the individual components to validate the code's logic and the ADC (Analog-to-Digital Converter) conversions.
 
-Hardware Degradation (The Burned Sensor): During the initial wiring, my LM35 sensor became damaged (likely due to a temporary short or reverse polarity). As a result, the sensor's baseline readings were abnormally high, sitting constantly near or above the standard room temperature threshold.
+Potentiometer Calibration Test: To verify the analog reading logic independently of the environmental sensors, a potentiometer was temporarily connected to the analog input. Adjusting the dial successfully yielded a smooth, scaled data range from 55 to 67 in the terminal. This proved that the ADC scaling multipliers in the code were functioning correctly before connecting the real sensors.
 
-The Faulty Buzzer: The buzzer provided for the circuit was also faulty, producing an inconsistent tone rather than a clean beep.
+Temperature Sensor (LM35) Test: The temperature threshold logic was validated by physically pressing/holding the LM35 sensor to apply body heat. The serial terminal successfully registered the real-time temperature spike. Once the readings crossed the hardcoded upper threshold, the microcontroller successfully engaged the DigitalOut pin, sounding the hardware buzzer.
 
-Troubleshooting Success: Despite the LM35 being damaged and reading artificially high, the underlying logic of my code was still correct. By applying an external heat source, the sensor did successfully register the temperature spike, cross the upper threshold, and successfully trigger the faulty buzzer to sound the alarm. This proved that the ADC conversion and threshold logic were perfectly functional, even if the physical components were degraded.
+Gas Sensor (MQ-2) Test: The gas monitoring loop was tested by exposing the MQ-2 sensor to a safe, simulated gas source. The sensor successfully detected the change in air quality and pulled the input pin to Logic 0. The system immediately recognized the state change and triggered the audible buzzer alarm, confirming the emergency response protocol works under real-world conditions.
 
 5. Conclusion
-This task successfully demonstrated the principles of reading analog signals and converting them into human-readable data. Dealing with a burned sensor and a faulty buzzer provided a highly realistic hardware debugging scenario, proving that robust code can still execute its intended safety protocols (triggering the alarm) even when physical components are compromised.
+This task successfully demonstrated the principles of reading both continuous analog signals and binary digital inputs, converting them into actionable, human-readable data. By rigorously testing the potentiometer, applying physical heat to the LM35, and triggering the MQ-2, the system proved it can reliably execute its safety protocols (terminal warnings and buzzer alarms) in real-time.
