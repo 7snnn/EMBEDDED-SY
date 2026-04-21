@@ -1,5 +1,4 @@
-/* * Module: UFMFN3-30-2 Embedded Systems
- * Student Name: [Hassan aljadi]
+
  * Task: Tutorial 1 - Synchronized Triple LED Toggle
  */
 
