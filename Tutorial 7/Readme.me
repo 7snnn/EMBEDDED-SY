@@ -1,0 +1,43 @@
+Tutorial 7 – Smart Home Motor Control
+Overview
+
+This tutorial extends the smart home system by adding relay-based DC motor control, hardware interrupts, LCD feedback, keypad input, and serial monitoring on the STM32 Nucleo-F439ZI.
+
+The system simulates a smart gate/door:
+
+A = Open
+B = Close
+C = Stop
+D = Change mode
+Hardware
+STM32 Nucleo-F439ZI
+2-channel relay module
+DC motor
+20x4 I2C LCD
+4x4 keypad
+PIR sensor
+Interrupt buttons / limit switches
+Green and red indicator LEDs
+330 Ω resistors for LEDs
+Capacitors for motor noise suppression
+Main pins
+Relay IN1 → PF_2
+Relay IN2 → PE_3
+LCD SDA → PB_9 / D14
+LCD SCL → PB_8 / D15
+Keypad rows → PB_3, PB_5, PC_7, PA_15
+Keypad cols → PB_12, PB_13, PB_15, PC_6
+Features
+Motor open / close / stop control
+Interrupt-driven response
+LCD motor status display
+Keypad manual control
+Serial monitor logging
+LED direction indication
+Example serial output
+Motor=STOPPED | Mode=MANUAL | LastEvent=NONE | Alarm=OFF
+Motor=CLOSING | Mode=MANUAL | LastEvent=KEY CLOSE | Alarm=OFF
+Motor=OPENING | Mode=MANUAL | LastEvent=KEY OPEN | Alarm=OFF
+Result
+
+The final system successfully controlled the motor in both directions, stopped correctly, updated the LCD live, and responded to keypad and interrupt events in real time.
